@@ -105,7 +105,6 @@ void Duty_20ms()
 
 void Duty_50ms()
 {
-	int i=0;
 	//Mode();	
 	//mode_check(CH_filter,mode_value);				commentted by Mr.Lin
 	//LED_Duty();								//LED任务

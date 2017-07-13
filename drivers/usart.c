@@ -143,18 +143,18 @@ void Usart2_Send(unsigned char *DataToSend ,u8 data_num)
   u8 i;
 	static uint16_t num=0;
 	static u8 len=0;
-	
 	DMA_Cmd(DMA1_Stream6, DISABLE);
 	DMA_ClearFlag(DMA1_Stream6,DMA_FLAG_TCIF6);//Çå³ýDMA2_Steam7´«ÊäÍê³É±êÖ¾
 	num = DMA_GetCurrDataCounter(DMA1_Stream6);
 	
 	for(i=0;i<data_num;i++)
 	{
+		
 		Tx2Buffer[count2++] = *(DataToSend+i);
 	}
 	for (i=0;i<num;i++)
 	{
-		Tx2DMABuffer[i]=Tx2Buffer[len-num+i];
+		Tx2DMABuffer[i]=Tx2Buffer[((u8)(len-num+i))];
 	}
 	for (;i<num+data_num;i++)
 	{

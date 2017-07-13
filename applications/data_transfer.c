@@ -157,13 +157,13 @@ void ANO_DT_Data_Exchange(void)
 	else if(f.send_speed)
 	{
 		f.send_speed = 0;
-		ANO_DT_Send_Speed(april_vx,april_vy,100.0);
+	//	ANO_DT_Send_Speed(april_vx,april_vy,100.0);
 	}
 /////////////////////////////////////////////////////////////////////////////////////
 	else if(f.send_user)
 	{
 		f.send_user = 0;
-		ANO_DT_Send_User();
+	//	ANO_DT_Send_User();
 	}
 /////////////////////////////////////////////////////////////////////////////////////
 	else if(f.send_senser)
@@ -195,7 +195,7 @@ void ANO_DT_Data_Exchange(void)
 	else if(f.send_power)
 	{
 		f.send_power = 0;
-		ANO_DT_Send_Power(123,456);
+//		ANO_DT_Send_Power(123,456);
 	}
 /////////////////////////////////////////////////////////////////////////////////////
 	else if(f.send_pid1)

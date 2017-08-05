@@ -11,7 +11,7 @@ typedef struct
 	float kdamp;
 
 }pid_t;
-
+extern u8 ParaSavedFlag;
 typedef struct 
 {
   float x;

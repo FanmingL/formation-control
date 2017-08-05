@@ -26,6 +26,7 @@ u8 thr_take_off_f = 0;
 u8 auto_take_off,auto_land;
 float height_ref;
 
+
 _PID_arg_st h_acc_arg;
 _PID_arg_st h_speed_arg;
 _PID_arg_st h_height_arg;
@@ -79,7 +80,6 @@ float Height_Ctrl(float T,float thr,u8 ready,float en)
 		en = 0;
 		thr_take_off = 0;
 		thr_take_off_f = 0;
-		thr=0.0f;
 	}
 	
 	
@@ -147,6 +147,7 @@ float Height_Ctrl(float T,float thr,u8 ready,float en)
 														&h_height_val,	//PID数据结构体
 														1500*en			//integration limit，积分限幅
 														 );			//输出	
+
 
 	//计算高度误差（可加滤波）
 	set_height_em += (set_speed - hc_value.m_speed) *T;

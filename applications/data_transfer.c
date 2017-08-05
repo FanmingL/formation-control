@@ -20,7 +20,8 @@
 #include "ultrasonic.h"
 #include "anotc_baro_ctrl.h"
 #include "led.h"
-
+#include "parameter.h"
+#include "bsp_flash.h"
 /////////////////////////////////////////////////////////////////////////////////////
 //数据拆分宏定义，在发送大于1字节的数据类型时，比如int16、float等，需要把数据拆分成单独字节进行发送
 #define BYTE0(dwTemp)       ( *( (char *)(&dwTemp)		) )
@@ -431,6 +432,7 @@ u16 flash_save_en_cnt = 0;
 u16 RX_CH[CH_NUM];
 short x=0,y=0;
 u16 height_guidance=0;
+extern sensor_setup_t sensor_setup;
 void ANO_DT_Data_Receive_Anl(u8 *data_buf,u8 num)
 {
 	u8 sum = 0;
@@ -456,6 +458,12 @@ void ANO_DT_Data_Receive_Anl(u8 *data_buf,u8 num)
 		else if(*(data_buf+4)==0X04)
 		{
 			Mag_CALIBRATED = 1;
+		}
+		else if (*(data_buf+4)==0X05)
+		{
+				ParaSavedFlag=1;
+				BSP_FLASH_Write(ADDR_FLASH_SECTOR_6,&ParaSavedFlag, 1);
+	BSP_FLASH_Write(ADDR_FLASH_SECTOR_7,sensor_setup.raw_data, 64);
 		}
 		else if((*(data_buf+4)>=0X021)&&(*(data_buf+4)<=0X26))
 		{

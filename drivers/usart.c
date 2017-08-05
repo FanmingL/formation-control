@@ -107,7 +107,6 @@ DMA_DeInit(DMA1_Stream6);
 void Usart2_IRQ(void)
 {
 	u8 com_data;
-	
 	if(USART2->SR & USART_SR_ORE)//ORE中断
 	{
 		com_data = USART2->DR;
@@ -320,8 +319,8 @@ void Usart1_Init(u32 br_num)
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 
   NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=2;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority =0;	
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority =1;	
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;		
 	NVIC_Init(&NVIC_InitStructure);	
 	
@@ -352,7 +351,6 @@ void Usart1_Init(u32 br_num)
 void USART1_IRQHandler(void)
 {
 	u8 com_data;
-		//	LED_Duty();
 	if(USART1->SR & USART_SR_ORE)//ORE中断
 	{
 
@@ -364,7 +362,6 @@ void USART1_IRQHandler(void)
 	{
 		
 		USART_ClearITPendingBit(USART1,USART_IT_RXNE);//清除中断标志
-	
 		com_data = USART1->DR;
 		ANO_DT_Data_Receive_Prepare2(com_data);
 
@@ -389,7 +386,7 @@ void Usart1_Send(unsigned char *DataToSend ,u8 data_num)
 	}
 	for (i=0;i<num;i++)
 	{
-		Tx1DMABuffer[i]=Tx1Buffer[len-num+i];
+		Tx1DMABuffer[i]=Tx1Buffer[((u8)(len-num+i))];
 	}
 	for (;i<num+data_num;i++)
 	{
@@ -502,7 +499,7 @@ void Usart3_Init(u32 br_num)
 void Usart3_IRQ(void)
 {
 	u8 com_data;
-	
+
 	if(USART3->SR & USART_SR_ORE)//ORE中断
 	{
 		com_data = USART3->DR;
@@ -549,7 +546,7 @@ void Usart3_Send(unsigned char *DataToSend ,u8 data_num)
 	}
 	for (i=0;i<num;i++)
 	{
-		Tx3DMABuffer[i]=Tx3Buffer[len-num+i];
+		Tx3DMABuffer[i]=Tx3Buffer[((u8)(len-num+i))];
 	}
 	for (;i<num+data_num;i++)
 	{

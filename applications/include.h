@@ -18,7 +18,7 @@
 
 
 #define MAXMOTORS 		(4)		//电机数量
-#define GET_TIME_NUM 	(5)		//设置获取时间的数组数量
+#define GET_TIME_NUM 	(6)		//设置获取时间的数组数量
 #define CH_NUM 				(8) 	//接收机通道数量
 
 #define USE_TOE_IN_UNLOCK 0 // 0：默认解锁方式，1：外八解锁方式

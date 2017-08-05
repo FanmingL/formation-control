@@ -1,7 +1,7 @@
 #include "include.h"
 #include "ultrasonic.h"
 #include "usart.h"
-
+#include "time.h"
 
 void Ultrasonic_Init()
 {
@@ -14,8 +14,8 @@ void Ultra_Duty()
 {
 	u8 temp[3];
 
-	ultra.h_dt = 0.05f; //50ms一次
-/*
+	ultra.h_dt = Get_Cycle_T(5)/1000000.0f; //50ms一次
+/*//////////////////////////////////////////////
 		UART5->DR = 0xe8;   //ks103地址（可设置）
 		while( (UART5->SR & USART_FLAG_TXE) == 0 );
 		
@@ -24,7 +24,7 @@ void Ultra_Duty()
 
 		UART5->DR = 0xbc;  //70ms,带温度补偿
 		while( (UART5->SR & USART_FLAG_TXE) == 0 );
-*/	
+//////////////////////////////////////////////*/	
 	#if defined(USE_KS103)
 		temp[0] = 0xe8;
 		temp[1] = 0x02;

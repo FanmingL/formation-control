@@ -347,13 +347,9 @@ void Param_SaveGyroOffset(xyz_f_t *offset)
 
 void Param_SaveMagOffset(xyz_f_t *offset)
 {
-	ParaSavedFlag=1;
  memcpy(&ak8975.Mag_Offset,offset,sizeof(xyz_f_t));
  memcpy(&sensor_setup.Offset.Mag, offset,sizeof(xyz_f_t));
  Para_WriteSettingToFile();
-	BSP_FLASH_Write(ADDR_FLASH_SECTOR_6,&ParaSavedFlag, 1);
-	BSP_FLASH_Write(ADDR_FLASH_SECTOR_7,sensor_setup.raw_data, 64);
-	
 }
 
 void Param_Save_3d_offset(xyz_f_t *offset)
